@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <definitions 
+ xmlns="http://schemas.xmlsoap.org/wsdl/" 
+ xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="SoapMeteoWs" targetNamespace="http://ws.matsaboli2.nwtis.foi.org/" xmlns:tns="http://ws.matsaboli2.nwtis.foi.org/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:fi="http://java.sun.com/xml/ns/wsit/2006/09/policy/fastinfoset/service" xmlns:tcp="http://java.sun.com/xml/ns/wsit/2006/09/policy/soaptcp/service" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702" xmlns:sc="http://schemas.sun.com/2006/03/wss/server" xmlns:wspp="http://java.sun.com/xml/ns/wsit/policy" 
+ >
+    <message name="zadnjiMeteoPodaciZaIoT"/>
+    <message name="zadnjiMeteoPodaciZaIoTResponse"/>
+    <message name="dajZadnjihNMeteoPodatakaZaIoT"/>
+    <message name="dajZadnjihNMeteoPodatakaZaIoTResponse"/>
+    <message name="dajMeteoPodatkeZaIoT"/>
+    <message name="dajMeteoPodatkeZaIoTResponse"/>
+    <message name="vazeciMeteoPodaciZaIoT"/>
+    <message name="vazeciMeteoPodaciZaIoTResponse"/>
+    <message name="dajAdresuZaIoT"/>
+    <message name="dajAdresuZaIoTResponse"/>
+    <portType name="SoapMeteoWs">
+        <operation name="zadnjiMeteoPodaciZaIoT">
+            <input message="tns:zadnjiMeteoPodaciZaIoT"/>
+            <output message="tns:zadnjiMeteoPodaciZaIoTResponse"/>
+        </operation>
+        <operation name="dajZadnjihNMeteoPodatakaZaIoT">
+            <input message="tns:dajZadnjihNMeteoPodatakaZaIoT"/>
+            <output message="tns:dajZadnjihNMeteoPodatakaZaIoTResponse"/>
+        </operation>
+        <operation name="dajMeteoPodatkeZaIoT">
+            <input message="tns:dajMeteoPodatkeZaIoT"/>
+            <output message="tns:dajMeteoPodatkeZaIoTResponse"/>
+        </operation>
+        <operation name="vazeciMeteoPodaciZaIoT">
+            <input message="tns:vazeciMeteoPodaciZaIoT"/>
+            <output message="tns:vazeciMeteoPodaciZaIoTResponse"/>
+        </operation>
+        <operation name="dajAdresuZaIoT">
+            <input message="tns:dajAdresuZaIoT"/>
+            <output message="tns:dajAdresuZaIoTResponse"/>
+        </operation>
+    </portType>
+    <binding name="SoapMeteoWsPortBinding" type="tns:SoapMeteoWs">
+        <operation name="zadnjiMeteoPodaciZaIoT">
+            <input></input>
+            <output></output>
+        </operation>
+        <operation name="dajZadnjihNMeteoPodatakaZaIoT">
+            <input></input>
+            <output></output>
+        </operation>
+        <operation name="dajMeteoPodatkeZaIoT">
+            <input></input>
+            <output></output>
+        </operation>
+        <operation name="vazeciMeteoPodaciZaIoT">
+            <input></input>
+            <output></output>
+        </operation>
+        <operation name="dajAdresuZaIoT">
+            <input></input>
+            <output></output>
+        </operation>
+    </binding>
+    <service name="SoapMeteoWs">
+        <port name="SoapMeteoWsPort" binding="tns:SoapMeteoWsPortBinding"/>
+    </service>
+</definitions>
