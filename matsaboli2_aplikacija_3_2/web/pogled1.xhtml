@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Pogled 1</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <style>
+            .jumbotron{
+                margin-bottom: 0px;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <div class="jumbotron">
+                <h1>NWTiS - Projektni zadatak</h1>
+                <h3>Opis: Aplikacija 3</h3>
+                <h4>Autor: Matija Sabolić</h4>
+            </div>
+            <nav class="navbar navbar-default">
+                <h:form>
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="#">Menu</a>
+                        </div>
+                        <div class="collapse navbar-collapse" id="navbar">
+                            <ul class="nav navbar-nav">
+                                <li class="active"><h:commandLink value="Pogled 1" action="#" /></li>
+                                <li><h:commandLink value="Pogled 2" action="#{navigacija.goToView2()}" /></li>
+                                <li><h:commandLink value="Odjava" action="#{autentikacija.logout()}" /></li>
+                            </ul>
+                        </div>
+                    </div>
+                </h:form>
+            </nav>
+
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-tittle">Pregled JMS poruka</h4>
+                    </div>
+                    <div class="panel-body">
+                        <h:form>
+                            <div class="btn-toolbar">
+                                <h:commandButton value="Prikaži poruke" action="#{prikazEmailStatitike.showData()}" class="btn btn-default">
+                                    <f:ajax render="@form" execute="@form" />
+                                </h:commandButton>
+                                <h:commandButton value="Obriši poruke" action="#{prikazEmailStatitike.deleteData()}" class="btn btn-default">
+                                    <f:ajax render="@form" execute="@form" />
+                                </h:commandButton>
+                            </div>
+                            <hr />
+                            <h:dataTable value="#{prikazEmailStatitike.lista}" var="data" class="table table-hover" >
+                                <h:column>
+                                    <f:facet name="header">Broj JMS poruke</f:facet>
+                                    <h:outputText value="#{data.JMSNumber}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Vrijeme početka</f:facet>
+                                    <h:outputText value="#{data.startTime}">
+                                        <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" timeZone="#{prikazEmailStatitike.timeZone}" />
+                                    </h:outputText>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Vrijeme kraja</f:facet>
+                                    <h:outputText value="#{data.endTime}">
+                                        <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" timeZone="#{prikazEmailStatitike.timeZone}" />
+                                    </h:outputText>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Broj poruka</f:facet>
+                                    <h:outputText value="#{data.messagesNumber}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Broj NWTiS poruka</f:facet>
+                                    <h:outputText value="#{data.NWTiSMessagesNumber}" />
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="well">
+                        Matija Sabolić - NWTiS &copy; 2017
+                    </div>
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>
+

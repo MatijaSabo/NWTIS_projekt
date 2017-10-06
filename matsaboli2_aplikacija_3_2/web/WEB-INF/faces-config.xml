@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+    <navigation-rule>
+        <from-view-id>/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{autentikacija.loginUser()}</from-action>
+            <from-outcome>login</from-outcome>
+            <to-view-id>/pogled1.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{autentikacija.loginUser()}</from-action>
+            <from-outcome>error</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/pogled1.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{navigacija.goToView2()}</from-action>
+            <from-outcome>view2</from-outcome>
+            <to-view-id>/pogled2.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{autentikacija.logout()}</from-action>
+            <from-outcome>logout</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/pogled2.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{navigacija.goToView1()}</from-action>
+            <from-outcome>view1</from-outcome>
+            <to-view-id>/pogled1.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{autentikacija.logout()}</from-action>
+            <from-outcome>logout</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+</faces-config>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>NWTIS konfiguracija</comment>
+<entry key="server.database">jdbc:mysql://localhost:3306/</entry>
+<entry key="user.username">nwtis_g1</entry>
+<entry key="user.password">g1_nwtis</entry>
+<entry key="user.database">nwtis_matsaboli2_bp_1</entry>
+<entry key="driver.database.odbc">sun.jdbc.odbc.JdbcOdbcDriver</entry>
+<entry key="driver.database.mysql">com.mysql.jdbc.Driver</entry>
+<entry key="driver.database.derby">org.apache.derby.jdbc.ClientDriver</entry>
+<entry key="driver.database.postgresql">org.postgresql.Driver</entry>
+<entry key="intervalPreuzimanjaMeteoPrognoze">300</entry>
+<entry key="apikey">165ed06ad0bd8f40128adfc7af6917ac</entry>
+<entry key="serverName">localhost</entry>
+<entry key="serverPort">12345</entry>
+<entry key="brojLinijaTablica">5</entry>
+<entry key="intervalPreuzimanjaPoruka">60</entry>
+<entry key="mail.server">127.0.0.1</entry>
+<entry key="mail.port">143</entry>
+<entry key="mail.username">matsaboli2@nwtis.nastava.foi.hr</entry>
+<entry key="mail.password">matsaboli2</entry>
+<entry key="mail.subject">NWTiS poruka</entry>
+<entry key="mail.nwtis_poruke">NWTiS_poruke</entry>
+<entry key="mqtt.slot">15</entry>
+<entry key="serialize_file">/lib/project_data.ser</entry>
+</properties>
