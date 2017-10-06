@@ -1,0 +1,180 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <f:view locale="#{lokalizacija.odabraniJezik}">
+
+        <h:head>
+            <title>#{m.pogled_1_naslov}</title>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+            <style>
+                .jumbotron{
+                    margin-bottom: 0px;
+                }
+            </style>
+        </h:head>
+        <h:body>
+            <div class="container">
+                <div class="jumbotron">
+                    <h1>#{m.header_naslov}</h1>
+                    <h3>#{m.header_opis}</h3>
+                    <h4>#{m.header_autor}</h4>
+                </div>
+                <nav class="navbar navbar-default">
+                    <h:form>
+                        <div class="container-fluid">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a class="navbar-brand" href="#">#{m.meni_naslov}</a>
+                            </div>
+                            <div class="collapse navbar-collapse" id="navbar">
+                                <ul class="nav navbar-nav">
+                                    <li class="active"><h:commandLink value="#{m.pogled_1_naslov}" action="#" /></li>
+                                    <li><h:commandLink value="#{m.pogled_2_naslov}" action="#{navigacija.goToView2()}" /></li>
+                                    <li><h:commandLink value="#{m.pogled_3_naslov}" action="#{navigacija.goToView3()}" /></li>
+                                    <li><h:commandLink value="#{m.pogled_4_naslov}" action="#{navigacija.goToView4()}" /></li>
+                                    <li><h:commandLink value="#{m.pogled_5_naslov}" action="#{navigacija.goToView5()}" /></li>
+                                    <li><h:commandLink value="#{m.pogled_6_naslov}" action="#{navigacija.goToView6()}" /></li>
+                                    <li><h:commandLink value="#{m.pogled_7_naslov}" action="#{navigacija.goToView7()}" /></li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">#{m.meni_jezik} <span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <c:if test="#{lokalizacija.odabraniJezik ne 'hr'}">
+                                                <li><h:commandLink action="#{lokalizacija.odaberiJezik('hr')}" value="Hrvatski" /></li>
+                                            </c:if>
+                                            <c:if test="#{lokalizacija.odabraniJezik eq 'hr'}">
+                                                <li class="active"><h:commandLink action="#" value="Hrvatski" /></li>
+                                            </c:if>
+                                            <c:if test="#{lokalizacija.odabraniJezik ne 'en'}">
+                                                <li><h:commandLink action="#{lokalizacija.odaberiJezik('en')}" value="Engleski" /></li>
+                                            </c:if>
+                                            <c:if test="#{lokalizacija.odabraniJezik eq 'en'}">
+                                                <li class="active"><h:commandLink action="#" value="Engleski" /></li>
+                                            </c:if>
+                                        </ul>
+                                    </li>
+                                    <li><h:commandLink value="#{m.odjava}" action="#{autentikacija.logout()}" /></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </h:form>
+                </nav>
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-tittle">#{m.pogled_1_panel_1_naslov}</h4>
+                        </div>
+                        <div class="panel-body">
+                            <h:form>
+                                <h:commandButton class="btn btn-default" value="#{m.pogled_1_button_show}" action="#{upravljanjeKorisnicima.prikaziKorisnika()}" >
+                                    <f:ajax render="@form" execute="@form" />
+                                </h:commandButton>
+                                <hr />
+
+                                <c:if test="#{upravljanjeKorisnicima.error_flag}">
+                                    <div class="alert alert-danger">
+                                        <c:if test="#{upravljanjeKorisnicima.all_data_error}">
+                                            <h:outputLabel value="#{m.edit_all_data_error}" /><br />
+                                        </c:if>
+                                        <c:if test="#{upravljanjeKorisnicima.user_error}">
+                                            <h:outputLabel value="#{m.edit_user_error}" /><br />
+                                        </c:if>
+                                        <c:if test="#{upravljanjeKorisnicima.pass_error}">
+                                            <h:outputLabel value="#{m.edit_pass_error}" /><br />
+                                        </c:if>
+                                        <c:if test="#{upravljanjeKorisnicima.email_error}">
+                                            <h:outputLabel value="#{m.edit_email_error}" /><br/>
+                                        </c:if>
+                                        <c:if test="#{upravljanjeKorisnicima.edit_error}">
+                                            <h:outputLabel value="#{m.edit_error}" /><br />
+                                        </c:if>
+                                    </div>
+                                </c:if>
+                                
+                                <c:if test="#{upravljanjeKorisnicima.edit_success}">
+                                    <div class="alert alert-success">
+                                        <h:outputText value="#{m.edit_success}" /><br />
+                                    </div>
+                                </c:if>
+
+                                <div class="form-group">
+                                    <h:outputLabel for="prezime_edit" value="#{m.pogled_1_prezime_label}" />
+                                    <h:inputText id="prezime_edit" value="#{upravljanjeKorisnicima.prezime}" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel for="kor_ime_edit" value="#{m.pogled_1_kor_ime_label}" />
+                                    <h:inputText id="kor_ime_edit" value="#{upravljanjeKorisnicima.kor_ime}" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel for="pass_edit" value="#{m.pogled_1_pass_label}" />
+                                    <h:inputSecret id="pass_edit" value="#{upravljanjeKorisnicima.pass}" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel for="pass_2_edit" value="#{m.pogled_1_pass_2_label}" />
+                                    <h:inputSecret id="pass_2_edit" value="#{upravljanjeKorisnicima.pass2}" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel for="email_edit" value="#{m.pogled_1_email_label}" />
+                                    <h:inputText id="email_edit" value="#{upravljanjeKorisnicima.email}" class="form-control" />
+                                </div>
+                                <h:commandButton class="btn btn-primary" value="#{m.pogled_1_button_edit}" action="#{upravljanjeKorisnicima.editUser()}" />
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-tittle">#{m.pogled_1_panel_2_naslov}</h4>
+                        </div>
+                        <div class="panel-body">
+                            <h:form>
+                                <h:commandButton class="btn btn-default" value="#{m.pogled_1_button_show}" action="#{upravljanjeKorisnicima.prikaziKorisnike()}">
+                                    <f:ajax render="@all" execute="@all" />
+                                </h:commandButton>
+                                <hr/>
+                                <h:dataTable value="#{upravljanjeKorisnicima.lista}" var="korisnik" class="table table-hover">
+                                    <h:column>
+                                        <f:facet name="header">#{m.pogled_1_id_label}</f:facet>
+                                        <h:outputText value="#{korisnik.ID}" /> 
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">#{m.pogled_1_kor_ime_label}</f:facet>
+                                        <h:outputText value="#{korisnik.kor_ime}" /> 
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">#{m.pogled_1_prezime_label}</f:facet>
+                                        <h:outputText value="#{korisnik.prezime}" />
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">#{m.pogled_1_email_label}</f:facet>
+                                        <h:outputText value="#{korisnik.email}" />
+                                    </h:column>
+                                </h:dataTable>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="well">
+                            #{m.footer} &copy; 2017
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:body>
+
+    </f:view>
+</html>
+

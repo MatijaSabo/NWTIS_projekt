@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <f:view locale="#{lokalizacija.odabraniJezik}">
+
+        <h:head>
+            <title>#{m.pogled_4_naslov}</title>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+            <style>
+                .jumbotron{
+                    margin-bottom: 0px;
+                }
+            </style>
+        </h:head>
+        <h:body>
+            <div class="container">
+                <div class="jumbotron">
+                    <h1>#{m.header_naslov}</h1>
+                    <h3>#{m.header_opis}</h3>
+                    <h4>#{m.header_autor}</h4>
+                </div>
+                <nav class="navbar navbar-default">
+                    <h:form>
+                        <div class="container-fluid">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a class="navbar-brand" href="#">#{m.meni_naslov}</a>
+                            </div>
+                            <div class="collapse navbar-collapse" id="navbar">
+                                <ul class="nav navbar-nav">
+                                    <li><h:commandLink value="#{m.pogled_1_naslov}" action="#{navigacija.goToView1()}" /></li>
+                                    <li><h:commandLink value="#{m.pogled_2_naslov}" action="#{navigacija.goToView2()}" /></li>
+                                    <li><h:commandLink value="#{m.pogled_3_naslov}" action="#{navigacija.goToView3()}" /></li>
+                                    <li class="active"><h:commandLink value="#{m.pogled_4_naslov}" action="#" /></li>
+                                    <li><h:commandLink value="#{m.pogled_5_naslov}" action="#{navigacija.goToView5()}" /></li>
+                                    <li><h:commandLink value="#{m.pogled_6_naslov}" action="#{navigacija.goToView6()}" /></li>
+                                    <li><h:commandLink value="#{m.pogled_7_naslov}" action="#{navigacija.goToView7()}" /></li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">#{m.meni_jezik} <span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <c:if test="#{lokalizacija.odabraniJezik ne 'hr'}">
+                                                <li><h:commandLink action="#{lokalizacija.odaberiJezik('hr')}" value="Hrvatski" /></li>
+                                            </c:if>
+                                            <c:if test="#{lokalizacija.odabraniJezik eq 'hr'}">
+                                                <li class="active"><h:commandLink action="#" value="Hrvatski" /></li>
+                                            </c:if>
+                                            <c:if test="#{lokalizacija.odabraniJezik ne 'en'}">
+                                                <li><h:commandLink action="#{lokalizacija.odaberiJezik('en')}" value="Engleski" /></li>
+                                            </c:if>
+                                            <c:if test="#{lokalizacija.odabraniJezik eq 'en'}">
+                                                <li class="active"><h:commandLink action="#" value="Engleski" /></li>
+                                            </c:if>
+                                        </ul>
+                                    </li>
+                                    <li><h:commandLink value="#{m.odjava}" action="#{autentikacija.logout()}" /></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </h:form>
+                </nav>
+
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-tittle">#{m.pogled_4_panel_1_naslov}</h4>
+                        </div>
+                        <div class="panel-body">
+                            <h:form>
+                                <h:outputLabel value="#{m.pogled_4_akcije_label}" /><br/>
+                                <div class="btn-toolbar">
+                                    <h:commandButton value="#{m.pogled_4_gumb_load}" action="#{upravljanjeIoT_MasterGrupom.sendLoad()}" class="btn btn-default" >
+                                        <f:ajax render="@form" execute="@form" />
+                                    </h:commandButton>
+                                    <h:commandButton value="#{m.pogled_4_gumb_clear}" action="#{upravljanjeIoT_MasterGrupom.sendClear()}" class="btn btn-default" >
+                                        <f:ajax render="@form" execute="@form" />
+                                    </h:commandButton>
+                                    <h:commandButton value="#{m.pogled_4_gumb_list}" action="#{upravljanjeIoT_MasterGrupom.sendList()}" class="btn btn-default" >
+                                        <f:ajax render="@form" execute="@form" />
+                                    </h:commandButton>
+                                </div>
+                                <hr />
+                                <h:dataTable value="#{upravljanjeIoT_MasterGrupom.lista}" var="podatak" class="table table-hover">
+                                    <h:column>
+                                        <f:facet name="header">#{m.pogled_4_id_label}</f:facet>
+                                        <h:outputText value="#{podatak.vrijednost}" />
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">#{m.pogled_4_naziv_label}</f:facet>
+                                        <h:outputText value="#{podatak.labela}" />
+                                    </h:column>
+                                </h:dataTable>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-tittle">#{m.pogled_4_panel_2_naslov}</h4>
+                        </div>
+                        <div class="panel-body">
+                            <h:form>
+                                <div class="form-group">
+                                    <h:selectOneMenu value="#{upravljanjeIoT_MasterGrupom.odabrani_iot}" class="form-control" >
+                                        <f:selectItems value="#{upravljanjeIoT_MasterGrupom.lista}"
+                                                       var="uredaj"
+                                                       itemLabel="#{uredaj.labela}"
+                                                       itemValue="#{uredaj.vrijednost}" />
+                                    </h:selectOneMenu>
+                                </div>
+                                <h:commandButton value="#{m.pogled_4_gumb_dohvati_podatke}" action="#{upravljanjeIoT_MasterGrupom.sendList()}" class="btn btn-default" >
+                                    <f:ajax render="@form" execute="@form" />
+                                </h:commandButton>
+                                <hr />
+                                <h:outputLabel value="#{m.pogled_4_akcije_label}" /><br />
+                                <div class="btn-toolbar">
+                                    <h:commandButton value="#{m.pogled_4_gumb_work}" action="#{upravljanjeIoT_MasterGrupom.sendIoTWork()}" class="btn btn-default" >
+                                        <f:ajax render="@form" execute="@form" />
+                                    </h:commandButton>
+                                    <h:commandButton value="#{m.pogled_4_gumb_wait}" action="#{upravljanjeIoT_MasterGrupom.sendIoTWait()}" class="btn btn-default" >
+                                        <f:ajax render="@form" execute="@form" />
+                                    </h:commandButton>
+                                    <h:commandButton value="#{m.pogled_4_gumb_remove}" action="#{upravljanjeIoT_MasterGrupom.sendIoTRemove()}" class="btn btn-default" >
+                                        <f:ajax render="@form" execute="@form" />
+                                    </h:commandButton>
+                                    <h:commandButton value="#{m.pogled_4_gumb_status}" action="#{upravljanjeIoT_MasterGrupom.sendIoTStatus()}" class="btn btn-default" >
+                                        <f:ajax render="@form" execute="@form" />
+                                    </h:commandButton>
+                                </div>
+                                <hr />
+                                <div class="form-group">
+                                    <h:outputLabel value="#{m.pogled_4_status_label}" for="status_iot" />
+                                    <h:inputText id="status_iot" value="#{upravljanjeIoT_MasterGrupom.iot_status}" readonly="true" class="form-control" />
+                                </div>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-tittle">#{m.pogled_4_panel_3_naslov}</h4>
+                        </div>
+                        <div class="panel-body">
+                            <h:form>
+                                <div class="form-group">
+                                    <h:outputLabel for="id_add" value="#{m.pogled_4_id_label}" />
+                                    <h:inputText id="id_add" value="#{upravljanjeIoT_MasterGrupom.id_add}" required="true" class="form-control">
+                                        <f:convertNumber integerOnly="true"/>
+                                    </h:inputText>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel for="naziv_add" value="#{m.pogled_4_naziv_label}" />
+                                    <h:inputText id="naziv_add" value="#{upravljanjeIoT_MasterGrupom.naziv_add}" required="true" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel for="adresa_add" value="#{m.pogled_4_adresa_label}" />
+                                    <h:inputText id="adresa_add" value="#{upravljanjeIoT_MasterGrupom.adresa_add}" required="true" class="form-control" />
+                                </div>
+                                <h:commandButton value="#{m.pogled_4_gumb_dodaj}" action="#{upravljanjeIoT_MasterGrupom.sendIoTAdd()}" class="btn btn-primary" >
+                                    <f:ajax render="@form" execute="@form" />
+                                </h:commandButton>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="well">
+                            #{m.footer} &copy; 2017
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:body>
+
+    </f:view>
+</html>
+

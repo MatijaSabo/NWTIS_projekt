@@ -1,0 +1,312 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <f:view locale="#{lokalizacija.odabraniJezik}">
+
+        <h:head>
+            <title>#{m.pogled_2_naslov}</title>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+            <style>
+                .jumbotron{
+                    margin-bottom: 0px;
+                }
+            </style>
+        </h:head>
+        <h:body>
+            <div class="container">
+                <div class="jumbotron">
+                    <h1>#{m.header_naslov}</h1>
+                    <h3>#{m.header_opis}</h3>
+                    <h4>#{m.header_autor}</h4>
+                </div>
+                <nav class="navbar navbar-default">
+                    <h:form>
+                        <div class="container-fluid">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a class="navbar-brand" href="#">#{m.meni_naslov}</a>
+                            </div>
+                            <div class="collapse navbar-collapse" id="navbar">
+                                <ul class="nav navbar-nav">
+                                    <li><h:commandLink value="#{m.pogled_1_naslov}" action="#{navigacija.goToView1()}" /></li>
+                                    <li class="active"><h:commandLink value="#{m.pogled_2_naslov}" action="#" /></li>
+                                    <li><h:commandLink value="#{m.pogled_3_naslov}" action="#{navigacija.goToView3()}" /></li>
+                                    <li><h:commandLink value="#{m.pogled_4_naslov}" action="#{navigacija.goToView4()}" /></li>
+                                    <li><h:commandLink value="#{m.pogled_5_naslov}" action="#{navigacija.goToView5()}" /></li>
+                                    <li><h:commandLink value="#{m.pogled_6_naslov}" action="#{navigacija.goToView6()}" /></li>
+                                    <li><h:commandLink value="#{m.pogled_7_naslov}" action="#{navigacija.goToView7()}" /></li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">#{m.meni_jezik} <span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <c:if test="#{lokalizacija.odabraniJezik ne 'hr'}">
+                                                <li><h:commandLink action="#{lokalizacija.odaberiJezik('hr')}" value="Hrvatski" /></li>
+                                            </c:if>
+                                            <c:if test="#{lokalizacija.odabraniJezik eq 'hr'}">
+                                                <li class="active"><h:commandLink action="#" value="Hrvatski" /></li>
+                                            </c:if>
+                                            <c:if test="#{lokalizacija.odabraniJezik ne 'en'}">
+                                                <li><h:commandLink action="#{lokalizacija.odaberiJezik('en')}" value="Engleski" /></li>
+                                            </c:if>
+                                            <c:if test="#{lokalizacija.odabraniJezik eq 'en'}">
+                                                <li class="active"><h:commandLink action="#" value="Engleski" /></li>
+                                            </c:if>
+                                        </ul>
+                                    </li>
+                                    <li><h:commandLink value="#{m.odjava}" action="#{autentikacija.logout()}" /></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </h:form>
+                </nav>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-tittle">#{m.pogled_2_panel_1_naslov}</h4>
+                            </div>
+                            <div class="panel-body">
+                                <h:form>
+                                    <div class="form-group">
+                                        <h:outputLabel for="naziv" value="#{m.pogled_2_naziv_label}" />
+                                        <h:inputText id="naziv" value="#{upravljanjeUredajima.naziv_add}" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel for="adresa" value="#{m.pogled_2_adresa_label}" />
+                                        <h:inputText id="adresa" value="#{upravljanjeUredajima.adresa_add}" class="form-control" />
+                                    </div>
+                                    <h:commandButton value="#{m.pogled_2_gumb_dodaj}" action="#{upravljanjeUredajima.dodajUredaj()}" class="btn btn-primary">
+                                        <f:ajax render="@all" execute="@all" />
+                                    </h:commandButton>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-tittle">#{m.pogled_2_panel_2_naslov}</h4>
+                            </div>
+                            <div class="panel-body">
+                                <h:form>
+                                    <div class="form-group">
+                                        <h:selectOneMenu value="#{upravljanjeUredajima.edit_uredaj_id}" class="form-control" >
+                                            <f:selectItems value="#{upravljanjeUredajima.lista_izbornik}"
+                                                           var="uredaj"
+                                                           itemLabel="#{uredaj.labela}"
+                                                           itemValue="#{uredaj.vrijednost}" />
+                                        </h:selectOneMenu>
+                                    </div>
+                                    <h:commandButton value="#{m.pogled_2_gumb_dohvati_podatke}" action="#{upravljanjeUredajima.dohvatiUredaj()}" class="btn btn-default">
+                                        <f:ajax render="@form" execute="@form" />
+                                    </h:commandButton>
+                                    <hr />
+                                    <div class="form-group">
+                                        <h:outputLabel for="naziv_edit" value="#{m.pogled_2_naziv_label}" />
+                                        <h:inputText id="naziv_edit" value="#{upravljanjeUredajima.naziv_edit}" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel for="adresa_edit" value="#{m.pogled_2_adresa_label}" />
+                                        <h:inputText id="adresa_edit" value="#{upravljanjeUredajima.adresa_edit}" class="form-control" />
+                                    </div>
+                                    <h:commandButton value="#{m.pogled_2_gumb_azuriraj_uredaj}" action="#{upravljanjeUredajima.azurirajUredaj()}" class="btn btn-primary">
+                                        <f:ajax render="@form" execute="@form" />
+                                    </h:commandButton>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-tittle">#{m.pogled_2_panel_3_naslov}</h4>
+                            </div>
+                            <div class="panel-body">
+                                <h:form>
+                                    <h:commandButton value="#{m.pogled_2_gumb_dohvati_podatke}" action="#{upravljanjeUredajima.dohvatiSveUredaje()}" class="btn btn-default">
+                                        <f:ajax render="@form" execute="@form" />
+                                    </h:commandButton>
+                                    <hr />
+                                    <h:dataTable value="#{upravljanjeUredajima.uredaji_lista}" var="IoT" class="table table-hover">
+                                        <h:column>
+                                            <f:facet name="header">#{m.pogled_2_id_label}</f:facet>
+                                            <h:outputText value="#{IoT.id}" />
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">#{m.pogled_2_naziv_label}</f:facet>
+                                            <h:outputText value="#{IoT.naziv}" />
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">#{m.pogled_2_latitude_label}</f:facet>
+                                            <h:outputText value="#{IoT.geoloc.latitude}" />
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">#{m.pogled_2_longitude_label}</f:facet>
+                                            <h:outputText value="#{IoT.geoloc.longitude}" />
+                                        </h:column>
+                                    </h:dataTable>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-tittle">#{m.pogled_2_panel_4_naslov}</h4>
+                            </div>
+                            <div class="panel-body">
+                                <h:form>
+                                    <div class="form-group">
+                                        <h:selectOneMenu value="#{upravljanjeUredajima.adresa_uradaj_id}" class="form-control" >
+                                            <f:selectItems value="#{upravljanjeUredajima.lista_izbornik}"
+                                                           var="uredaj"
+                                                           itemLabel="#{uredaj.labela}"
+                                                           itemValue="#{uredaj.vrijednost}" />
+                                        </h:selectOneMenu>
+                                    </div>
+                                    <h:commandButton value="#{m.pogled_2_gumb_dohvati_podatke}" action="#{upravljanjeUredajima.dohvatiAdresuUredaja()}" class="btn btn-default">
+                                        <f:ajax render="@form" execute="@form" />
+                                    </h:commandButton>
+                                    <hr />
+                                    <div class="form-group">
+                                        <h:outputLabel for="adresa_uredaja" value="#{m.pogled_2_adresa_label}" />
+                                        <h:inputText id="adresa_uredaja" value="#{upravljanjeUredajima.adresa_uredaja}" readonly="true" class="form-control" />
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-tittle">#{m.pogled_2_panel_5_naslov}</h4>
+                            </div>
+                            <div class="panel-body">
+                                <h:form>
+                                    <div class="form-group">
+                                        <h:selectOneMenu value="#{upravljanjeUredajima.uredaj_zdanji_podaci_id}" class="form-control" >
+                                            <f:selectItems value="#{upravljanjeUredajima.lista_izbornik}"
+                                                           var="uredaj"
+                                                           itemLabel="#{uredaj.labela}"
+                                                           itemValue="#{uredaj.vrijednost}" />
+                                        </h:selectOneMenu>
+                                    </div>
+                                    <h:commandButton value="#{m.pogled_2_gumb_dohvati_podatke}" action="#{upravljanjeUredajima.dohvatiZadnjeMeteoPodatke()}" class="btn btn-default">
+                                        <f:ajax render="@form" execute="@form" />
+                                    </h:commandButton>
+                                    <hr />
+                                    <table class="table table-hover">
+                                        <tr>
+                                            <td><h:outputLabel value="#{m.meteo_weather} " /></td>
+                                            <td><h:outputText value="#{upravljanjeUredajima.zadnji_podaci.weatherValue}" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td><h:outputLabel value="#{m.meteo_temp} " /></td>
+                                            <td><h:outputText value="#{upravljanjeUredajima.zadnji_podaci.temperatureValue} #{upravljanjeUredajima.zadnji_podaci.temperatureUnit}" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td><h:outputLabel value="#{m.meteo_temp_max} " /></td>
+                                            <td><h:outputText value="#{upravljanjeUredajima.zadnji_podaci.temperatureMax} #{upravljanjeUredajima.zadnji_podaci.temperatureUnit}" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td><h:outputLabel value="#{m.meteo_temp_min} " /></td>
+                                            <td><h:outputText value="#{upravljanjeUredajima.zadnji_podaci.temperatureMin} #{upravljanjeUredajima.zadnji_podaci.temperatureUnit}" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td><h:outputLabel value="#{m.meteo_humidity} " /></td>
+                                            <td><h:outputText value="#{upravljanjeUredajima.zadnji_podaci.humidityValue} #{upravljanjeUredajima.zadnji_podaci.humidityUnit}" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td><h:outputLabel value="#{m.meteo_pressure} " /></td>
+                                            <td><h:outputText value="#{upravljanjeUredajima.zadnji_podaci.pressureValue} #{upravljanjeUredajima.zadnji_podaci.pressureUnit}" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td><h:outputLabel value="#{m.meteo_wind} " /></td>
+                                            <td><h:outputText value="#{upravljanjeUredajima.zadnji_podaci.windSpeedValue}" /></td>
+                                        </tr>
+                                    </table>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-tittle">#{m.pogled_2_panel_6_naslov}</h4>
+                            </div>
+                            <div class="panel-body">
+                                <h:form>
+                                    <div class="form-group">
+                                        <h:selectOneMenu value="#{upravljanjeUredajima.uredaj_trenutni_podaci_id}" class="form-control" >
+                                            <f:selectItems value="#{upravljanjeUredajima.lista_izbornik}"
+                                                           var="uredaj"
+                                                           itemLabel="#{uredaj.labela}"
+                                                           itemValue="#{uredaj.vrijednost}" />
+                                        </h:selectOneMenu>
+                                    </div>
+                                    <h:commandButton value="#{m.pogled_2_gumb_dohvati_podatke}" action="#{upravljanjeUredajima.dohvatiTrenutneMeteoPodatke()}" class="btn btn-default">
+                                        <f:ajax render="@form" execute="@form" />
+                                    </h:commandButton>    
+                                    <hr />
+                                    <table class="table table-hover">
+                                        <tr>
+                                            <td><h:outputLabel value="#{m.meteo_weather} " /></td>
+                                            <td><h:outputText value="#{upravljanjeUredajima.trenutni_podaci.weatherValue}" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td><h:outputLabel value="#{m.meteo_temp} " /></td>
+                                            <td><h:outputText value="#{upravljanjeUredajima.trenutni_podaci.temperatureValue} #{upravljanjeUredajima.trenutni_podaci.temperatureUnit}" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td><h:outputLabel value="#{m.meteo_temp_max} " /></td>
+                                            <td><h:outputText value="#{upravljanjeUredajima.trenutni_podaci.temperatureMax} #{upravljanjeUredajima.trenutni_podaci.temperatureUnit}" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td><h:outputLabel value="#{m.meteo_temp_min} " /></td>
+                                            <td><h:outputText value="#{upravljanjeUredajima.trenutni_podaci.temperatureMin} #{upravljanjeUredajima.trenutni_podaci.temperatureUnit}" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td><h:outputLabel value="#{m.meteo_humidity} " /></td>
+                                            <td><h:outputText value="#{upravljanjeUredajima.trenutni_podaci.humidityValue} #{upravljanjeUredajima.trenutni_podaci.humidityUnit}" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td><h:outputLabel value="#{m.meteo_pressure} " /></td>
+                                            <td><h:outputText value="#{upravljanjeUredajima.trenutni_podaci.pressureValue} #{upravljanjeUredajima.trenutni_podaci.pressureUnit}" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td><h:outputLabel value="#{m.meteo_wind} " /></td>
+                                            <td><h:outputText value="#{upravljanjeUredajima.trenutni_podaci.windSpeedValue}" /></td>
+                                        </tr>
+                                    </table>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="well">
+                            #{m.footer} &copy; 2017
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:body>
+
+    </f:view>
+</html>
+

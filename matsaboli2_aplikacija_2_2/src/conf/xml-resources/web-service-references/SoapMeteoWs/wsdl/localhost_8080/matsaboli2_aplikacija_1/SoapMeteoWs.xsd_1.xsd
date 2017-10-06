@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.2-hudson-740-. --><xs:schema xmlns:tns="http://ws.matsaboli2.nwtis.foi.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://ws.matsaboli2.nwtis.foi.org/">
+
+<xs:element name="dajAdresuZaIoT" type="tns:dajAdresuZaIoT" />
+
+<xs:element name="dajAdresuZaIoTResponse" type="tns:dajAdresuZaIoTResponse" />
+
+<xs:element name="dajMeteoPodatkeZaIoT" type="tns:dajMeteoPodatkeZaIoT" />
+
+<xs:element name="dajMeteoPodatkeZaIoTResponse" type="tns:dajMeteoPodatkeZaIoTResponse" />
+
+<xs:element name="dajZadnjihNMeteoPodatakaZaIoT" type="tns:dajZadnjihNMeteoPodatakaZaIoT" />
+
+<xs:element name="dajZadnjihNMeteoPodatakaZaIoTResponse" type="tns:dajZadnjihNMeteoPodatakaZaIoTResponse" />
+
+<xs:element name="vazeciMeteoPodaciZaIoT" type="tns:vazeciMeteoPodaciZaIoT" />
+
+<xs:element name="vazeciMeteoPodaciZaIoTResponse" type="tns:vazeciMeteoPodaciZaIoTResponse" />
+
+<xs:element name="zadnjiMeteoPodaciZaIoT" type="tns:zadnjiMeteoPodaciZaIoT" />
+
+<xs:element name="zadnjiMeteoPodaciZaIoTResponse" type="tns:zadnjiMeteoPodaciZaIoTResponse" />
+
+<xs:complexType name="dajZadnjihNMeteoPodatakaZaIoT">
+<xs:sequence>
+<xs:element name="IoT" type="xs:int" />
+<xs:element name="n" type="xs:int" />
+<xs:element name="kor_ime" type="xs:string" minOccurs="0" />
+<xs:element name="pass" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dajZadnjihNMeteoPodatakaZaIoTResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:meteoPodaci" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="meteoPodaci">
+<xs:sequence>
+<xs:element name="cloudsName" type="xs:string" minOccurs="0" />
+<xs:element name="cloudsValue" type="xs:int" />
+<xs:element name="humidityUnit" type="xs:string" minOccurs="0" />
+<xs:element name="humidityValue" type="xs:float" minOccurs="0" />
+<xs:element name="lastUpdate" type="xs:dateTime" minOccurs="0" />
+<xs:element name="precipitationMode" type="xs:string" minOccurs="0" />
+<xs:element name="precipitationUnit" type="xs:string" minOccurs="0" />
+<xs:element name="precipitationValue" type="xs:float" minOccurs="0" />
+<xs:element name="pressureUnit" type="xs:string" minOccurs="0" />
+<xs:element name="pressureValue" type="xs:float" minOccurs="0" />
+<xs:element name="sunRise" type="xs:dateTime" minOccurs="0" />
+<xs:element name="sunSet" type="xs:dateTime" minOccurs="0" />
+<xs:element name="temperatureMax" type="xs:float" minOccurs="0" />
+<xs:element name="temperatureMin" type="xs:float" minOccurs="0" />
+<xs:element name="temperatureUnit" type="xs:string" minOccurs="0" />
+<xs:element name="temperatureValue" type="xs:float" minOccurs="0" />
+<xs:element name="visibility" type="xs:string" minOccurs="0" />
+<xs:element name="weatherIcon" type="xs:string" minOccurs="0" />
+<xs:element name="weatherNumber" type="xs:int" />
+<xs:element name="weatherValue" type="xs:string" minOccurs="0" />
+<xs:element name="windDirectionCode" type="xs:string" minOccurs="0" />
+<xs:element name="windDirectionName" type="xs:string" minOccurs="0" />
+<xs:element name="windDirectionValue" type="xs:float" minOccurs="0" />
+<xs:element name="windSpeedName" type="xs:string" minOccurs="0" />
+<xs:element name="windSpeedValue" type="xs:float" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dajMeteoPodatkeZaIoT">
+<xs:sequence>
+<xs:element name="id" type="xs:int" />
+<xs:element name="pocetak" type="xs:long" />
+<xs:element name="kraj" type="xs:long" />
+<xs:element name="kor_ime" type="xs:string" minOccurs="0" />
+<xs:element name="pass" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dajMeteoPodatkeZaIoTResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:meteoPodaci" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="zadnjiMeteoPodaciZaIoT">
+<xs:sequence>
+<xs:element name="IoT" type="xs:int" />
+<xs:element name="kor_ime" type="xs:string" minOccurs="0" />
+<xs:element name="pass" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="zadnjiMeteoPodaciZaIoTResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:meteoPodaci" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dajAdresuZaIoT">
+<xs:sequence>
+<xs:element name="id" type="xs:int" />
+<xs:element name="kor_ime" type="xs:string" minOccurs="0" />
+<xs:element name="pass" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dajAdresuZaIoTResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="vazeciMeteoPodaciZaIoT">
+<xs:sequence>
+<xs:element name="id" type="xs:int" />
+<xs:element name="kor_ime" type="xs:string" minOccurs="0" />
+<xs:element name="pass" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="vazeciMeteoPodaciZaIoTResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:meteoPodaci" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

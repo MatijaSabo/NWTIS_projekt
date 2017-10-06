@@ -1,0 +1,177 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <f:view locale="#{lokalizacija.odabraniJezik}">
+
+        <h:head>
+            <title>#{m.index_naslov}</title>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+            <style>
+                .jumbotron{
+                    margin-bottom: 0px;
+                }
+            </style>
+        </h:head>
+        <h:body>
+            <div class="container">
+                <div class="jumbotron">
+                    <h1>#{m.header_naslov}</h1>
+                    <h3>#{m.header_opis}</h3>
+                    <h4>#{m.header_autor}</h4>
+                </div>
+                <nav class="navbar navbar-default">
+                    <h:form>
+                        <div class="container-fluid">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a class="navbar-brand" href="#">#{m.meni_naslov}</a>
+                            </div>
+                            <div class="collapse navbar-collapse" id="navbar">
+                                <ul class="nav navbar-nav">
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">#{m.meni_jezik} <span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <c:if test="#{lokalizacija.odabraniJezik ne 'hr'}">
+                                                <li><h:commandLink action="#{lokalizacija.odaberiJezik('hr')}" value="Hrvatski" /></li>
+                                            </c:if>
+                                            <c:if test="#{lokalizacija.odabraniJezik eq 'hr'}">
+                                                <li class="active"><h:commandLink action="#" value="Hrvatski" /></li>
+                                            </c:if>
+                                            <c:if test="#{lokalizacija.odabraniJezik ne 'en'}">
+                                                <li><h:commandLink action="#{lokalizacija.odaberiJezik('en')}" value="Engleski" /></li>
+                                            </c:if>
+                                            <c:if test="#{lokalizacija.odabraniJezik eq 'en'}">
+                                                <li class="active"><h:commandLink action="#" value="Engleski" /></li>
+                                            </c:if>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </h:form>
+                </nav>
+
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-tittle">#{m.registracija_naslov}</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3" align="center">
+                                <img src="https://cdn1.iconfinder.com/data/icons/users-and-groups/38/user-group-add-512.png" alt="W3Schools.com" width="120" height="120"/>  
+                            </div>
+
+                            <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
+                                <br /><br />
+                                <h:form>
+                                    <c:if test="#{autentikacija.flag_error}">
+                                        <div class="alert alert-danger">
+                                            <c:if test="#{autentikacija.all_data_error}" >
+                                                <h:outputLabel value="#{m.registracija_all_data_error}" /><br />
+                                            </c:if>
+                                            <c:if test="#{autentikacija.user_error}" >
+                                                <h:outputLabel value="#{m.registracija_user_error}" /><br />
+                                            </c:if>
+                                            <c:if test="#{autentikacija.pass_error}" >
+                                                <h:outputLabel value="#{m.registracija_pass_error}" /><br />
+                                            </c:if>
+                                            <c:if test="#{autentikacija.email_error}" >
+                                                <h:outputLabel value="#{m.registracija_email_error}" /><br />
+                                            </c:if>
+                                            <c:if test="#{autentikacija.register_error}" >
+                                                <h:outputLabel value="#{m.registracija_register_error}" />
+                                            </c:if>
+                                        </div>
+                                    </c:if>
+
+                                    <c:if test="#{autentikacija.flag_success}">
+                                        <div class="alert alert-success">
+                                            <h:outputLabel value="#{m.registracija_success_message}" />
+                                        </div>
+                                    </c:if>
+
+                                    <div class="form-group">
+                                        <h:outputLabel for="kor_ime" value="#{m.registracija_kor_ime}" />
+                                        <h:inputText id="kor_ime" value="#{autentikacija.kor_ime}" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel for="prezime" value="#{m.registracija_prezime}" />
+                                        <h:inputText id="prezime" value="#{autentikacija.prezime}" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel for="pass" value="#{m.registracija_pass}" />
+                                        <h:inputSecret id="pass" value="#{autentikacija.pass}" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel for="pass_2" value="#{m.registracija_pass_2}" />
+                                        <h:inputSecret id="pass_2" value="#{autentikacija.pass_2}" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel for="email" value="#{m.registracija_email}" />
+                                        <h:inputText id="email" value="#{autentikacija.email}" class="form-control" />
+                                    </div>
+                                    <h:commandButton value="#{m.registracija_gumb}" action="#{autentikacija.register()}" class="btn btn-primary" />   
+                                </h:form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-tittle">#{m.prijava_naslov}</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3" align="center">
+                                <img src="https://www.garimpeiroweb.com.br/wp-content/uploads/2017/04/provider_avatar.png" alt="W3Schools.com" width="120" height="120"/>  
+                            </div>
+
+                            <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
+                                <br /><br />
+                                <h:form>
+                                    <c:if test="#{autentikacija.login_error}">
+                                        <div class="alert alert-danger">
+                                            <h:outputLabel value="#{m.login_error}" />
+                                        </div>
+                                    </c:if>
+
+                                    <div class="form-group">
+                                        <h:outputLabel for="kor_ime" value="#{m.prijava_kor_ime}" />
+                                        <h:inputText id="kor_ime" value="#{autentikacija.kor_ime_login}" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <h:outputLabel for="pass" value="#{m.prijava_pass}" />
+                                        <h:inputSecret id="pass" value="#{autentikacija.pass_login}" class="form-control" />
+                                    </div>
+                                    <h:commandButton value="#{m.prijava_gumb}" action="#{autentikacija.login()}" class="btn btn-primary" />
+                                </h:form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="well">
+                            #{m.footer} &copy; 2017
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:body>
+    </f:view>
+</html>
+
